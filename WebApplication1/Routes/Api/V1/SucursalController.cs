@@ -17,7 +17,7 @@ namespace WebApplication1.Routes.Api.V1
             _service = service;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAll();
@@ -32,16 +32,6 @@ namespace WebApplication1.Routes.Api.V1
             return Ok(result);
         }
 
-        [HttpGet("by-nombre")]
-        public async Task<IActionResult> GetByNombre([FromQuery] string nombre)
-        {
-            if (string.IsNullOrWhiteSpace(nombre))
-                return BadRequest(new { message = "El nombre es requerido" });
-
-            var result = await _service.GetByNombre(nombre);
-            return Ok(result);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SucursalDto dto)
         {
@@ -52,8 +42,17 @@ namespace WebApplication1.Routes.Api.V1
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] SucursalDto dto)
         {
-            var updated = await _service.Update(id, dto);
-            if (!updated) return NotFound();
+            var success = await _service.Update(id, dto);
+            if (!success) return NotFound();
+            return NoContent();
+        }
+
+        // PUT lógico para desactivar sucursal y sus hijos
+        [HttpPut("{id}/desactivar")]
+        public async Task<IActionResult> Desactivar(int id)
+        {
+            var success = await _service.Update(id, new SucursalDto { Estado = false });
+            if (!success) return NotFound();
             return NoContent();
         }
     }

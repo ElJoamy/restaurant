@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -8,11 +8,14 @@ using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Cargar configuraci�n de JWT desde appsettings.json
+// Cargar configuración de JWT desde appsettings.json
 var jwtConfig = builder.Configuration.GetSection("Jwt");
-var key = jwtConfig["Key"];
+var key = jwtConfig["Key"]!;
 
-// Add services to the container.
+// ➕ Configuración CORS personalizada
+builder.Services.AddCorsConfiguration();
+
+// Agregar controladores y documentación Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -39,20 +42,21 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
 
-// Agregar DbContext
+// Base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(DbConfig.GetConnectionString()));
 
-builder.Services.AddScoped<WebApplication1.Services.AuthService>();
+// Servicios
+builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<CargoService>();
 builder.Services.AddScoped<SucursalService>();
 
-// Agregar Autenticaci�n JWT
+// Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -64,13 +68,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtConfig["Issuer"],
             ValidAudience = jwtConfig["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
 
 var app = builder.Build();
 
-// Middleware de desarrollo (Swagger)
+// Middlewares
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -78,12 +82,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCorsConfiguration(); // 🧠 Aquí usamos nuestra política CORS
 
-// Autenticaci�n y Autorizaci�n
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Mapear controladores
 app.MapControllers();
-
 app.Run();
