@@ -70,6 +70,11 @@ builder.Services.AddScoped<VentasService>();
 builder.Services.AddScoped<TurnoPersonalService>();
 builder.Services.AddScoped<ProveedoresService>();
 builder.Services.AddScoped<ProductosService>();
+builder.Services.AddScoped<DetalleCompraService>();
+builder.Services.AddScoped<DetallePedidoService>();
+builder.Services.AddScoped<DetalleVentasService>();
+builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<PedidosService>();
 
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

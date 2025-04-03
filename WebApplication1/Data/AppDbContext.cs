@@ -48,6 +48,10 @@ namespace WebApplication1.Data
             modelBuilder.Entity<Productos>()
                 .Property(p => p.Estado)
                 .HasConversion<string>();
+
+            modelBuilder.Entity<Pedidos>()
+                .Property(p => p.Estado)
+                .HasConversion<string>();
         }
     }
 }

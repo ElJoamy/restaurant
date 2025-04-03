@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication1.Enums;
 
 namespace WebApplication1.Models
 {
@@ -22,6 +23,6 @@ namespace WebApplication1.Models
         public decimal Total { get; set; } = 0;
 
         [MaxLength(20)]
-        public string Estado { get; set; } = "Recibido";
+        public EstadoPedido Estado { get; set; } = EstadoPedido.Recibido;
     }
 }
