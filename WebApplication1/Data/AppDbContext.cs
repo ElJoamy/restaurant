@@ -33,18 +33,20 @@ namespace WebApplication1.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Convertir el enum EstadoMesa a string
             modelBuilder.Entity<Mesas>()
                 .Property(m => m.EstadoMesa)
                 .HasConversion<string>();
 
-            // También puedes agregarlo para Reservas y Ventas si usas enums string allí
             modelBuilder.Entity<Reservas>()
                 .Property(r => r.Estado)
                 .HasConversion<string>();
 
             modelBuilder.Entity<Ventas>()
                 .Property(v => v.Estado)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Productos>()
+                .Property(p => p.Estado)
                 .HasConversion<string>();
         }
     }

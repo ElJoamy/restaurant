@@ -16,7 +16,12 @@ var key = jwtConfig["Key"]!;
 builder.Services.AddCorsConfiguration();
 
 // Agregar controladores y documentación Swagger
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -62,6 +67,9 @@ builder.Services.AddScoped<ComprasService>();
 builder.Services.AddScoped<MesasService>();
 builder.Services.AddScoped<ReservasService>();
 builder.Services.AddScoped<VentasService>();
+builder.Services.AddScoped<TurnoPersonalService>();
+builder.Services.AddScoped<ProveedoresService>();
+builder.Services.AddScoped<ProductosService>();
 
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

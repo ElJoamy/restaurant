@@ -19,4 +19,10 @@
         Cancelada,
         Pendiente
     }
+    public enum EstadoProducto
+    {
+        Disponible,
+        Agotado,
+        Descontinuado
+    }
 }

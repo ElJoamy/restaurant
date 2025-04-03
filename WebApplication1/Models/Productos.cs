@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication1.Enums;
 
 namespace WebApplication1.Models
 {
@@ -26,6 +27,6 @@ namespace WebApplication1.Models
         public int Stock { get; set; } = 0;
 
         [MaxLength(20)]
-        public string Estado { get; set; } = "Disponible";
+        public EstadoProducto Estado { get; set; } = EstadoProducto.Disponible;
     }
 }
