@@ -12,6 +12,8 @@
         public int? Telefono { get; set; }
         public string? Genero { get; set; }
         public int? Salario { get; set; }
+        public string? Usuario { get; set; }
+        public string? Contrasena { get; set; }
         public bool? Estado { get; set; } = true;
     }
 }

@@ -55,6 +55,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<CargoService>();
 builder.Services.AddScoped<SucursalService>();
+builder.Services.AddScoped<PersonalService>();
+builder.Services.AddScoped<ProfileService>();
+
 
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
