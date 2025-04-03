@@ -62,6 +62,13 @@ namespace WebApplication1.Routes.Api.V1
             if (!updated) return NotFound();
             return NoContent();
         }
+        // PUT: /api/v1/cargos/{id}/desactivar
+        [HttpPut("{id}/desactivar")]
+        public async Task<IActionResult> Desactivar(int id)
+        {
+            var desactivado = await _service.Desactivar(id);
+            if (!desactivado) return NotFound();
+            return NoContent();
+        }
     }
-
 }

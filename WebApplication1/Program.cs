@@ -57,7 +57,9 @@ builder.Services.AddScoped<CargoService>();
 builder.Services.AddScoped<SucursalService>();
 builder.Services.AddScoped<PersonalService>();
 builder.Services.AddScoped<ProfileService>();
-
+builder.Services.AddScoped<InventarioService>();
+builder.Services.AddScoped<ComprasService>();
+builder.Services.AddScoped<MesasService>();
 
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

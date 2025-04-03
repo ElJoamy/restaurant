@@ -60,5 +60,36 @@ namespace WebApplication1.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<bool> Desactivar(int id)
+        {
+            var cargo = await _context.Cargos.FirstOrDefaultAsync(c => c.IdCargo == id && c.Estado);
+            if (cargo == null) return false;
+
+            // Desactivar el cargo
+            cargo.Estado = false;
+
+            // Desactivar todo el personal que tiene ese cargo
+            var personalRelacionado = await _context.Personal
+                .Where(p => p.IdCargo == id && p.Estado)
+                .ToListAsync();
+
+            foreach (var persona in personalRelacionado)
+            {
+                persona.Estado = false;
+
+                // Desactivar también sus turnos
+                var turnos = await _context.TurnosPersonal
+                    .Where(t => t.IdPersonal == persona.IdPersonal && t.Estado)
+                    .ToListAsync();
+
+                foreach (var turno in turnos)
+                {
+                    turno.Estado = false;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
