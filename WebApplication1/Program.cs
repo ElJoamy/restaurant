@@ -60,6 +60,8 @@ builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<InventarioService>();
 builder.Services.AddScoped<ComprasService>();
 builder.Services.AddScoped<MesasService>();
+builder.Services.AddScoped<ReservasService>();
+builder.Services.AddScoped<VentasService>();
 
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
