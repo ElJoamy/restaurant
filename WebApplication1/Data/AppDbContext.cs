@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication1.Enums;
 using WebApplication1.Models;
 
 namespace WebApplication1.Data
@@ -51,6 +52,10 @@ namespace WebApplication1.Data
 
             modelBuilder.Entity<Pedidos>()
                 .Property(p => p.Estado)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<MetodoPago>()
+                .Property(p => p.Metodo)
                 .HasConversion<string>();
         }
     }

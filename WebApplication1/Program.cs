@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApplication1.Config;
 using WebApplication1.Data;
+using WebApplication1.Models;
 using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,10 +59,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Servicios
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<ProfileService>();
+
 builder.Services.AddScoped<CargoService>();
 builder.Services.AddScoped<SucursalService>();
 builder.Services.AddScoped<PersonalService>();
-builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<InventarioService>();
 builder.Services.AddScoped<ComprasService>();
 builder.Services.AddScoped<MesasService>();
@@ -75,6 +77,10 @@ builder.Services.AddScoped<DetallePedidoService>();
 builder.Services.AddScoped<DetalleVentasService>();
 builder.Services.AddScoped<ClienteService>();
 builder.Services.AddScoped<PedidosService>();
+builder.Services.AddScoped<PagoService>();
+builder.Services.AddScoped<MetodoPagoService>();
+builder.Services.AddScoped<FacturasService>();
+builder.Services.AddScoped<CategoriaProductosService>();
 
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

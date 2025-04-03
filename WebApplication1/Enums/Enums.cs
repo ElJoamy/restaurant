@@ -33,4 +33,11 @@
         Entregado,
         Cancelado
     }
+    public enum MetodoPagoEnum
+    {
+        Efectivo,
+        Tarjeta,
+        QR
+    }
+
 }
