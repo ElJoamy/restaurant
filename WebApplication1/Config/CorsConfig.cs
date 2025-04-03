@@ -17,7 +17,8 @@ namespace WebApplication1.Config
                             "http://192.168.232.230:80",
                             "http://192.168.232.230",
                             "http://localhost",
-                            "http://localhost/"
+                            "http://localhost/",
+                            "*"
                         )
                         .AllowAnyMethod()
                         .AllowAnyHeader()
