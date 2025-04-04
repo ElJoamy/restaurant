@@ -82,6 +82,11 @@ builder.Services.AddScoped<MetodoPagoService>();
 builder.Services.AddScoped<FacturasService>();
 builder.Services.AddScoped<CategoriaProductosService>();
 
+builder.Services.AddScoped<VentaFlujoService>();
+builder.Services.AddScoped<FlujoCompletoService>();
+builder.Services.AddScoped<FlujoCompletoCompraService>();
+
+
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -108,7 +113,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCorsConfiguration(); // 🧠 Aquí usamos nuestra política CORS
+app.UseCorsConfiguration();
 
 app.UseAuthentication();
 app.UseAuthorization();
